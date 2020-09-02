@@ -31,7 +31,9 @@ export default {
   },
   methods: {
     save: function(){
-      alert('保存されました');
+      this.$store.commit("save",{
+        body: this.memobody
+      })
       this.$router.push("/");
     }
   }
