@@ -1,7 +1,7 @@
 <template>
   <div class="editor">
     <h1>Edit Memo</h1>
-    <textarea name="memo" v-model="memo.body"></textarea>
+    <textarea name="memo" v-model="memoBody"></textarea>
     <button @click="save">保存</button>
   </div>
 </template>
@@ -10,18 +10,22 @@
 <script>
 export default {
   name: 'edit',
-  computed: {
-    memo: function(){
+  data: function(){
+    return {
+      memoBody: ''
+    }
+  },
+  mounted: function () {
       // /edit/id の idを取り出している
       let id = this.$route.params["id"];
-      return this.$store.state.memos.find(memo => memo.id == id);
-    }
+      let memo = this.$store.state.memos.find(memo => memo.id == id);
+      this.memoBody = memo.body;
   },
   methods: {
     save: function(){
       this.$store.commit("update", {
-        id: this.memo.id,
-        body: this.memo.body
+        id: this.$route.params["id"],
+        body: this.memoBody
       });
       this.$router.push('/');
     }
