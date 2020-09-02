@@ -6,3 +6,21 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "new",
+  data: function(){
+    return {
+      memobody: ""
+    }
+  },
+  methods: {
+    save: function(){
+      this.$store.commit("save",{
+        body: this.memobody
+      })
+      this.$router.push("/");
+    }
+  }
+}
+</script>
