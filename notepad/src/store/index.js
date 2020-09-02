@@ -9,6 +9,7 @@ export default new Vuex.Store({
       {id: 1, body: 'サンプルのメモです'}
     ]
   },
+  // 変化をさせるときに使う処理 mutations
   mutations: {
     // memoをパラメータとして受け取る
     save(state, memo) {
@@ -17,6 +18,11 @@ export default new Vuex.Store({
       memo.id = max +1;
       // stateの中のmemosにmemoをpush(追加)するという意味
       state.memos.push(memo);
+    },
+    update(state,data) {
+      // 指定したdataというものをmemosの中からidと一致するものだけを取り出してxに格納する
+      let x = state.memos.find(memo => memo.id == data.id);
+      x.body = data.body;
     }
   }
 })
