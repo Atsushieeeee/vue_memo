@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Header>My Memos</Header>
     <ul v-for="memo in newest" :key="memo.id">
       <li>
         <!-- index.jsのname:Editを定義したのでrouterから自動的にpathを取ってきている。 -->
@@ -28,27 +29,12 @@
 </style>
 
 <script>
-export default {
-  name: "new",
-  data: function(){
-    return {
-      memobody: ""
-    }
-  },
-  methods: {
-    save: function(){
-      this.$store.commit("save",{
-        body: this.memobody
-      })
-      this.$router.push("/");
-    }
-  }
-}
-</script>
-
-<script>
+import Header from "@/components/Header.vue"
 export default {
   name: "home",
+  components: {
+    Header
+  },
   computed:{
     newest: function(){
       // slice().reverse()で逆から呼び出す
